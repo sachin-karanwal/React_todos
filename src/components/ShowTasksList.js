@@ -2,22 +2,11 @@ import React from "react";
 import ShowTaskItem from "./ShowTaskItem";
 import EditTaskItem from "./EditTaskItem";
 
-const ShowTasksList = props =>{
-    // const [editFlag, setEditFlag] = useState(true);
-
-    return(
+const ShowTasksList = props => {
+    return (
         <ul>
-            {props.taskList.map(task=>{
-               return <li className="task-item" key={task.id} > 
-                         <input type="checkbox" name="taskcheck" id="taskcheck" />
-                       <span className="task-text">{task.task}  </span>
-                     
-                      <button className="edit-btn" >edit</button> 
-                      <button className="delete-btn" onClick={()=>{
-                                  props.onDeleteTask(task.id)
-                               }}>
-                        delete</button>
-                      </li>
+            {props.tasksList.map(task => {
+                return task.editFlag ? <EditTaskItem key={task.id} task={task} onUpdateTask={props.onUpdateTask} /> : <ShowTaskItem key={task.id} task={task} onDeleteTask={props.onDeleteTask} onUpdateTask={props.onUpdateTask} />
             })}
         </ul>
     )
